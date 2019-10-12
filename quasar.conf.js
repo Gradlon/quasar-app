@@ -9,7 +9,8 @@ module.exports = function (ctx) {
     boot: [
       'i18n',
       'axios',
-      'hello'
+      'hello',
+      'apollo'
 
     ],
 

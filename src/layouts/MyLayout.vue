@@ -85,19 +85,45 @@
     </q-drawer>
 
     <q-page-container>
+      <div class="col">
+        <p>TEST: {{author[0].userName}}</p>
+    <ul>
+      <li v-for="item in author" :key="item.id">
+        <h6>{{item.userName}}</h6>
+        <ul>
+          <li>{{item.email}}</li>
+          <li>{{item.author}}</li>
+          <li>{{item.id}}</li>
+        </ul>
+      </li>
+    </ul>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import { gql } from 'apollo-boost'
+const authorQuery = gql`
+  query {
+    author: getUsers{userName, email, id, author}
+  }`
 export default {
   name: 'MyLayout',
 
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      getUsers: {},
+      author: {}
     }
+  },
+  methods: {
+  },
+  apollo: {
+    // Simple query that will update the 'author' vue property
+    author: authorQuery
   }
 }
 </script>
